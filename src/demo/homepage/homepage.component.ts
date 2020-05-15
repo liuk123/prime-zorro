@@ -10,10 +10,14 @@ export class HomepageComponent implements OnInit {
 
   title="";
   constructor(
+    @Inject('CONFIG') private config,
     private message: NzMessageService,
   ) { }
 
   ngOnInit() {
+    // console.log(this.config.url)
+    // console.log(objectUtil.delNull(['', [], ' 123 ']))
+    // this.title=objectUtil.delNull(['', [], ' 123 ']);
   }
   createBasicMessage(): void {
     this.message.info('This is a normal message');
