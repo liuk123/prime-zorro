@@ -11,8 +11,7 @@ export class Result {
   constructor(public resultCode?: number,
               public resultMsg?: string,
               public data?: any
-  ) {
-  }
+  ) {}
 
   static init(obj: any): Result {
     const model = new Result();
