@@ -1,0 +1,41 @@
+{
+  "menu": [
+    {
+      "route": "/demo",
+      "title": "模版",
+      "type": "sub",
+      "open": true,
+      "icon": "bars",
+      "children": [
+        {
+          "route": "/demo/homepage",
+          "title": "首页",
+          "type": "router"
+        },
+        {
+          "route": "/demo/upload",
+          "title": "上传",
+          "type": "router"
+        }
+      ]
+    },{
+      "route": "/links",
+      "title": "网站",
+      "type": "sub",
+      "open": false,
+      "icon": "bars",
+      "children": [
+        {
+          "link": "https://ng.ant.design/components/button/zh",
+          "title": "zorro",
+          "type": "link"
+        },
+        {
+          "link": "https://angular.cn/guide/template-syntax",
+          "title": "angular",
+          "type": "link"
+        }
+      ]
+    }
+  ]
+}
