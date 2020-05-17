@@ -77,7 +77,8 @@ export class HttpUtilService {
       });
     }
     const req = new HttpRequest(method, url, formData, {
-      headers
+      headers,
+      reportProgress:true,
     });
     return this.http.request(req).pipe(filter(e => e instanceof HttpResponse));
   }
