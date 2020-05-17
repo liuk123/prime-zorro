@@ -12,12 +12,12 @@ import {Result} from '../model/result.model';
 export class HttpUtilService {
 
   constructor(private http: HttpClient,
-              private messageService: MessageUtilService) {
+              private messageUtil: MessageUtilService) {
   }
 
   /** GET请求处理（一般用于获取数据） **/
-  get(url: string, data: any = {}, status: HttpResponseAlertStatus = HttpResponseAlertStatus.ALL): Observable<Result | any> {
-    return this.http.get<Result | any>(url, data).pipe(
+  get(url: string, httpOptions: any = {}, status: HttpResponseAlertStatus = HttpResponseAlertStatus.ALL): Observable<Result | any> {
+    return this.http.get<Result | any>(url, httpOptions).pipe(
       map(restResponse => {
         return this.callback(restResponse, status);
       }),
@@ -85,17 +85,15 @@ export class HttpUtilService {
   callback(response, status: HttpResponseAlertStatus) {
     response = Result.init(response);
     if (!response) {
-      this.messageService.error('未获取到数据！');
+      this.messageUtil.error('未获取到数据！');
     }
     if (status !== HttpResponseAlertStatus.NONE) {
-      this.messageService.default(response, status);
+      this.messageUtil.default(response, status);
     }
     return response;
   }
 
   /**
-   * Handle Http operation that failed.
-   * Let the app continue.
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
@@ -110,23 +108,23 @@ export class HttpUtilService {
     };
   }
 
-  /**
-   * 获取全部url参数,并转换成对象
-   * */
-  getUrlParams(url) {
-    var url = url ? url : window.location.href;
-    var _pa = url.substring(url.indexOf('?') + 1),
-      _arrS = _pa.split('&'),
-      _rs = {};
-    for (var i = 0, _len = _arrS.length; i < _len; i++) {
-      var pos = _arrS[i].indexOf('=');
-      if (pos == -1) {
-        continue;
-      }
-      var name = _arrS[i].substring(0, pos),
-        value = decodeURIComponent(_arrS[i].substring(pos + 1));
-      _rs[name] = value;
-    }
-    return _rs;
-  }
+  // /**
+  //  * 获取全部url参数,并转换成对象
+  //  * */
+  // getUrlParams(url) {
+  //   var url = url ? url : window.location.href;
+  //   var _pa = url.substring(url.indexOf('?') + 1),
+  //     _arrS = _pa.split('&'),
+  //     _rs = {};
+  //   for (var i = 0, _len = _arrS.length; i < _len; i++) {
+  //     var pos = _arrS[i].indexOf('=');
+  //     if (pos == -1) {
+  //       continue;
+  //     }
+  //     var name = _arrS[i].substring(0, pos),
+  //       value = decodeURIComponent(_arrS[i].substring(pos + 1));
+  //     _rs[name] = value;
+  //   }
+  //   return _rs;
+  // }
 }

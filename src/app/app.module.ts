@@ -4,8 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
-import { NzModalService, NzMessageService } from 'ng-zorro-antd';
 
 
 @NgModule({
@@ -15,7 +13,6 @@ import { NzModalService, NzMessageService } from 'ng-zorro-antd';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    SharedModule,
   ],
   providers: [
   ],

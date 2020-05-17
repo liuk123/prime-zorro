@@ -1,14 +1,16 @@
-enum defaultMessage {
+import { objectUtil } from "prime-jsutils"
+
+export enum defaultMessage {
   "操作出现错误！" =-1,
   "操作失败！"=0,
   "操作成功！"=1,
   "操作成功，即将进行一下步操作！"=2
 };
+
 export class Result {
 
- 
   [key: string]: any;
-  
+
   constructor(public resultCode?: number,
               public resultMsg?: string,
               public data?: any
@@ -57,7 +59,7 @@ export class Result {
    * @param data
    */
   static isSuccess(data: any): boolean {
-    return (data && data.isSuccess && data.isSuccess()) || (data && data.resultCode === 1);
+    return data && data.isSuccess && data.isSuccess();
   }
 
   /**
@@ -65,7 +67,7 @@ export class Result {
    * @param data
    */
   static isError(data: any): boolean {
-    return data && data.resultMsg && data.resultCode === -1;
+    return data && data.isError && data.isError();
   }
 
   /**
@@ -73,7 +75,7 @@ export class Result {
    * @param data
    */
   static isArray(data: any): boolean {
-    return data && data.isSuccess && data.isSuccess() && data.data && Array.isArray(data.data);
+    return data && data.isSuccess && data.isSuccess() && objectUtil.isArray(data.data);
   }
 
   /**
@@ -89,7 +91,11 @@ export class Result {
    * @param data
    */
   static isNotEmptyObject(data: any): boolean {
-    return data && data.isSuccess && data.isSuccess() && data.data;
+    return data &&
+      data.isSuccess && 
+      data.isSuccess() &&
+      objectUtil.isObject(data.data)&& 
+      !objectUtil.isEmptyObject(data.data);
   }
 
   /**
@@ -97,6 +103,12 @@ export class Result {
    */
   isSuccess() {
     return this.resultCode === 1 || this.resultCode === 2;
+  }
+  /**
+   * 判断是否失败
+   */
+  isError(){
+    return this.resultCode === 0 || this.resultCode === -1
   }
 
   /**
@@ -106,7 +118,7 @@ export class Result {
     if (this.resultMsg) {
       return this.resultMsg;
     } else {
-      const message = this.defaultMessage[this.resultCode];
+      const message = defaultMessage[this.resultCode];
       if (message) {
         return message;
       } else {
