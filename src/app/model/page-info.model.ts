@@ -1,4 +1,4 @@
-import { CommonModel } from './models.api';
+import { CommonModel } from './common.model';
 
 export class PageInfo<T> extends CommonModel {
 

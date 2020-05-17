@@ -8,16 +8,19 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "package": "ng-packagr -p package.json"
+    "package": "ng-packagr -p package.json",
+    "publish":"npm publish dist"
   },
   "$schema": "./node_modules/ng-packagr/package.schema.json",
   "ngPackage": {
     "lib": {
       "entryFile": "public-api.ts"
     },
-    "whitelistedNonPeerDependencies": ["."]
+    "whitelistedNonPeerDependencies": [
+      "."
+    ]
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "~9.1.6",
     "@angular/common": "~9.1.6",

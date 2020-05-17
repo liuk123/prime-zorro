@@ -1,11 +1,12 @@
+enum defaultMessage {
+  "操作出现错误！" =-1,
+  "操作失败！"=0,
+  "操作成功！"=1,
+  "操作成功，即将进行一下步操作！"=2
+};
 export class Result {
 
-  defaultMessage = {
-    "-1": "操作出现错误！",
-    0: "操作失败！",
-    1: "操作成功！",
-    2: "操作成功，即将进行一下步操作！"
-  };
+ 
   [key: string]: any;
   
   constructor(public resultCode?: number,
