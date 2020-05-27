@@ -22,7 +22,7 @@ export class Result {
       model.data = obj;
     } else if (obj instanceof Result) {
       return obj;
-    } else if (typeof obj === "object") {
+    } else if (objectUtil.isObject(obj)) {
       Object.keys(obj).forEach(key => {
         if (key in model) {
           model[key] = obj[key];
